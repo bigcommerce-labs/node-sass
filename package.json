@@ -1,6 +1,6 @@
 {
   "name": "@bigcommerce/node-sass",
-  "version": "3.4.4",
+  "version": "3.4.5-debug-flag",
   "libsass": "3.3.2",
   "description": "Wrapper around libsass",
   "license": "MIT",
@@ -28,7 +28,7 @@
   "scripts": {
     "coverage": "node scripts/coverage.js",
     "install": "node scripts/install.js",
-    "postinstall": "node scripts/build.js",
+    "postinstall": "node scripts/build.js --debug",
     "pretest": "node_modules/.bin/jshint bin lib scripts test",
     "test": "node_modules/.bin/mocha test"
   },
