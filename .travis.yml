@@ -14,7 +14,6 @@ env:
     - export NODE_VERSION="7"
     - export NODE_VERSION="6"
     - export NODE_VERSION="5"
-    - export NODE_VERSION="4"
 
 matrix:
   fast_finish: true
@@ -55,12 +54,6 @@ after_success:
   - if [ $TRAVIS_OS_NAME == "linux" ] && [ $NODE_VERSION == "4" ]; then
       npm run-script coverage;
     fi
-
-cache:
-  directories:
-    - $HOME/.node-gyp
-    - $HOME/.npm
-    - node_modules
 
 before_deploy:
   - export RELEASE_BINDING_FILE=$(node scripts/travis-release.js)

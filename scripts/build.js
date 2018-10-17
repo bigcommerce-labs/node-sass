@@ -140,7 +140,7 @@ function build(options) {
     var proc = spawn(process.sass.runtime.execPath, args, {
       stdio: [0, 1, 2]
     });
-
+    
     proc.on('exit', function(errorCode) {
       if (!errorCode) {
         afterBuild(options);
