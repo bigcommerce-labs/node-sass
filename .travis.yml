@@ -49,6 +49,7 @@ before_install:
 
 script:
   - npm install
+  - npm test
 
 after_success:
   - if [ $TRAVIS_OS_NAME == "linux" ] && [ $NODE_VERSION == "4" ]; then
