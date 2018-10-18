@@ -5,8 +5,6 @@
 #include "create_string.h"
 #include "sass_types/factory.h"
 
-using namespace std;
-
 Sass_Import_List sass_importer(const char* cur_path, Sass_Importer_Entry cb, struct Sass_Compiler* comp)
 {
   void* cookie = sass_importer_get_cookie(cb);
