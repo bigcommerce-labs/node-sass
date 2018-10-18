@@ -2,7 +2,10 @@
 #include <stdexcept>
 #include "custom_importer_bridge.h"
 #include "create_string.h"
-using namespace std;
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 SassImportList CustomImporterBridge::post_process_return_value(v8::Local<v8::Value> returned_value) const {
   cout << "!!! returned_value: " << returned_value << endl;
