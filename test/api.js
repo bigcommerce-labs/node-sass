@@ -1,3 +1,7 @@
+var SegfaultHandler = require('segfault-handler');
+
+SegfaultHandler.registerHandler('crash.log');
+
 var assert = require('assert'),
     fs = require('fs'),
     path = require('path'),

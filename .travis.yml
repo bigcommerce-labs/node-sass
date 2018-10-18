@@ -48,8 +48,8 @@ before_install:
   - g++ --version
 
 script:
+  - npm install segfault-handler
   - rm -rf node_modules
-  - npm rebuild
   - npm install
   - npm test
 

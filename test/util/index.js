@@ -1,3 +1,7 @@
+var SegfaultHandler = require('segfault-handler');
+
+SegfaultHandler.registerHandler('crash.log');
+
 var fs = require('fs'),
     join = require('path').join,
     spec = join(__dirname, '..', 'fixtures', 'spec', 'spec');

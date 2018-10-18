@@ -1,3 +1,7 @@
+var SegfaultHandler = require('segfault-handler');
+
+SegfaultHandler.registerHandler('crash.log');
+
 process.env.NODESASS_COV ? require('../lib-cov') : require('../lib');
 
 var assert = require('assert'),
