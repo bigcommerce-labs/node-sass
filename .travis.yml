@@ -48,6 +48,8 @@ before_install:
   - g++ --version
 
 script:
+  - rm -rf node_modules
+  - npm rebuild
   - npm install
   - npm test
 
