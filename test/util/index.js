@@ -1,5 +1,6 @@
 var SegfaultHandler = require('segfault-handler');
 
+
 SegfaultHandler.registerHandler('crash.log');
 
 var fs = require('fs'),
