@@ -8,7 +8,7 @@ os:
 
 env:
   global:
-    - SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
+    - SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=false
   matrix:
     - export NODE_VERSION="10"
     - export NODE_VERSION="8"
