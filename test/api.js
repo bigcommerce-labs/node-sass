@@ -8,7 +8,7 @@ var assert = require('assert'),
     read = fs.readFileSync,
     sass = process.env.NODESASS_COV ? require('../lib-cov') : require('../lib'),
     fixture = path.join.bind(null, __dirname, 'fixtures'),
-    resolveFixture = path.resolve.bind(null, __dirname, 'fixtures');
+    // resolveFixture = path.resolve.bind(null, __dirname, 'fixtures');
 
 describe('api', function() {
 
