@@ -1210,383 +1210,383 @@ describe('api', function() {
   //   });
   // });
 
-  describe('.renderSync(importer)', function() {
-    var src = read(fixture('include-files/index.scss'), 'utf8');
+  // describe('.renderSync(importer)', function() {
+  //   var src = read(fixture('include-files/index.scss'), 'utf8');
 
-    it('should override imports with "data" as input and returns file and contents', function(done) {
-      var result = sass.renderSync({
-        data: src,
-        importer: function(url, prev) {
-          return {
-            file: prev + url,
-            contents: 'div {color: yellow;}'
-          };
-        }
-      });
+  //   it('should override imports with "data" as input and returns file and contents', function(done) {
+  //     var result = sass.renderSync({
+  //       data: src,
+  //       importer: function(url, prev) {
+  //         return {
+  //           file: prev + url,
+  //           contents: 'div {color: yellow;}'
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
+  //     done();
+  //   });
 
-    it('should override imports with "file" as input and returns file and contents', function(done) {
-      var result = sass.renderSync({
-        file: fixture('include-files/index.scss'),
-        importer: function(url, prev) {
-          return {
-            file: prev + url,
-            contents: 'div {color: yellow;}'
-          };
-        }
-      });
+  //   it('should override imports with "file" as input and returns file and contents', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('include-files/index.scss'),
+  //       importer: function(url, prev) {
+  //         return {
+  //           file: prev + url,
+  //           contents: 'div {color: yellow;}'
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
+  //     done();
+  //   });
 
-    it('should override imports with "data" as input and returns file', function(done) {
-      var result = sass.renderSync({
-        data: src,
-        importer: function(url) {
-          return {
-            file: path.resolve(path.dirname(fixture('include-files/index.scss')), url + (path.extname(url) ? '' : '.scss'))
-          };
-        }
-      });
+  //   it('should override imports with "data" as input and returns file', function(done) {
+  //     var result = sass.renderSync({
+  //       data: src,
+  //       importer: function(url) {
+  //         return {
+  //           file: path.resolve(path.dirname(fixture('include-files/index.scss')), url + (path.extname(url) ? '' : '.scss'))
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), '');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), '');
+  //     done();
+  //   });
 
-    it('should override imports with "file" as input and returns file', function(done) {
-      var result = sass.renderSync({
-        file: fixture('include-files/index.scss'),
-        importer: function(url, prev) {
-          return {
-            file: path.resolve(path.dirname(prev), url + (path.extname(url) ? '' : '.scss'))
-          };
-        }
-      });
+  //   it('should override imports with "file" as input and returns file', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('include-files/index.scss'),
+  //       importer: function(url, prev) {
+  //         return {
+  //           file: path.resolve(path.dirname(prev), url + (path.extname(url) ? '' : '.scss'))
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), '');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), '');
+  //     done();
+  //   });
 
-    it('should override imports with "data" as input and returns contents', function(done) {
-      var result = sass.renderSync({
-        data: src,
-        importer: function() {
-          return {
-            contents: 'div {color: yellow;}'
-          };
-        }
-      });
+  //   it('should override imports with "data" as input and returns contents', function(done) {
+  //     var result = sass.renderSync({
+  //       data: src,
+  //       importer: function() {
+  //         return {
+  //           contents: 'div {color: yellow;}'
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
+  //     done();
+  //   });
 
-    it('should override imports with "file" as input and returns contents', function(done) {
-      var result = sass.renderSync({
-        file: fixture('include-files/index.scss'),
-        importer: function() {
-          return {
-            contents: 'div {color: yellow;}'
-          };
-        }
-      });
+  //   it('should override imports with "file" as input and returns contents', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('include-files/index.scss'),
+  //       importer: function() {
+  //         return {
+  //           contents: 'div {color: yellow;}'
+  //         };
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
+  //     done();
+  //   });
 
-    it('should accept arrays of importers and return respect the order', function(done) {
-      var result = sass.renderSync({
-        file: fixture('include-files/index.scss'),
-        importer: [
-          function() {
-            return sass.NULL;
-          },
-          function() {
-            return {
-              contents: 'div {color: yellow;}'
-            };
-          }
-        ]
-      });
+  //   it('should accept arrays of importers and return respect the order', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('include-files/index.scss'),
+  //       importer: [
+  //         function() {
+  //           return sass.NULL;
+  //         },
+  //         function() {
+  //           return {
+  //             contents: 'div {color: yellow;}'
+  //           };
+  //         }
+  //       ]
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: yellow; }\n\ndiv {\n  color: yellow; }');
+  //     done();
+  //   });
 
-    it('should be able to see its options in this.options', function(done) {
-      var fxt = fixture('include-files/index.scss');
-      var sync = false;
-      sass.renderSync({
-        file: fixture('include-files/index.scss'),
-        importer: function() {
-          assert.equal(fxt, this.options.file);
-          sync = true;
-          return {};
-        }
-      });
-      assert.equal(sync, true);
-      done();
-    });
+  //   it('should be able to see its options in this.options', function(done) {
+  //     var fxt = fixture('include-files/index.scss');
+  //     var sync = false;
+  //     sass.renderSync({
+  //       file: fixture('include-files/index.scss'),
+  //       importer: function() {
+  //         assert.equal(fxt, this.options.file);
+  //         sync = true;
+  //         return {};
+  //       }
+  //     });
+  //     assert.equal(sync, true);
+  //     done();
+  //   });
 
-    it('should throw user-defined error', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: src,
-          importer: function() {
-            return new Error('doesn\'t exist!');
-          }
-        });
-      }, /doesn\'t exist!/);
+  //   it('should throw user-defined error', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: src,
+  //         importer: function() {
+  //           return new Error('doesn\'t exist!');
+  //         }
+  //       });
+  //     }, /doesn\'t exist!/);
 
-      done();
-    });
+  //     done();
+  //   });
 
-    it('should throw exception when importer returns an invalid value', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: src,
-          importer: function() {
-            return { contents: new Buffer('i am not a string!') };
-          }
-        });
-      }, /returned value of `contents` must be a string/);
+  //   it('should throw exception when importer returns an invalid value', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: src,
+  //         importer: function() {
+  //           return { contents: new Buffer('i am not a string!') };
+  //         }
+  //       });
+  //     }, /returned value of `contents` must be a string/);
 
-      done();
-    });
-  });
+  //     done();
+  //   });
+  // });
 
-  describe('.renderSync(functions)', function() {
-    it('should call custom function in sync mode', function(done) {
-      var result = sass.renderSync({
-        data: 'div { width: cos(0) * 50px; }',
-        functions: {
-          'cos($a)': function(angle) {
-            if (!(angle instanceof sass.types.Number)) {
-              throw new TypeError('Unexpected type for "angle"');
-            }
-            return new sass.types.Number(Math.cos(angle.getValue()));
-          }
-        }
-      });
+  // describe('.renderSync(functions)', function() {
+  //   it('should call custom function in sync mode', function(done) {
+  //     var result = sass.renderSync({
+  //       data: 'div { width: cos(0) * 50px; }',
+  //       functions: {
+  //         'cos($a)': function(angle) {
+  //           if (!(angle instanceof sass.types.Number)) {
+  //             throw new TypeError('Unexpected type for "angle"');
+  //           }
+  //           return new sass.types.Number(Math.cos(angle.getValue()));
+  //         }
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  width: 50px; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  width: 50px; }');
+  //     done();
+  //   });
 
-    it('should return a list of selectors after calling the headings custom function', function(done) {
-      var result = sass.renderSync({
-        data: '#{headings(2,5)} { color: #08c; }',
-        functions: {
-          'headings($from: 0, $to: 6)': function(from, to) {
-            var i, f = from.getValue(), t = to.getValue(),
-                list = new sass.types.List(t - f + 1);
+  //   it('should return a list of selectors after calling the headings custom function', function(done) {
+  //     var result = sass.renderSync({
+  //       data: '#{headings(2,5)} { color: #08c; }',
+  //       functions: {
+  //         'headings($from: 0, $to: 6)': function(from, to) {
+  //           var i, f = from.getValue(), t = to.getValue(),
+  //               list = new sass.types.List(t - f + 1);
 
-            for (i = f; i <= t; i++) {
-              list.setValue(i - f, new sass.types.String('h' + i));
-            }
+  //           for (i = f; i <= t; i++) {
+  //             list.setValue(i - f, new sass.types.String('h' + i));
+  //           }
 
-            return list;
-          }
-        }
-      });
+  //           return list;
+  //         }
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'h2, h3, h4, h5 {\n  color: #08c; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'h2, h3, h4, h5 {\n  color: #08c; }');
+  //     done();
+  //   });
 
-    it('should let custom function invoke sass types constructors without the `new` keyword', function(done) {
-      var result = sass.renderSync({
-        data: 'div { color: foo(); }',
-        functions: {
-          'foo()': function() {
-            return sass.types.Number(42, 'em');
-          }
-        }
-      });
+  //   it('should let custom function invoke sass types constructors without the `new` keyword', function(done) {
+  //     var result = sass.renderSync({
+  //       data: 'div { color: foo(); }',
+  //       functions: {
+  //         'foo()': function() {
+  //           return sass.types.Number(42, 'em');
+  //         }
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: 42em; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: 42em; }');
+  //     done();
+  //   });
 
-    it('should let us register custom functions without signatures', function(done) {
-      var result = sass.renderSync({
-        data: 'div { color: foo(20, 22); }',
-        functions: {
-          foo: function(a, b) {
-            return new sass.types.Number(a.getValue() + b.getValue(), 'em');
-          }
-        }
-      });
+  //   it('should let us register custom functions without signatures', function(done) {
+  //     var result = sass.renderSync({
+  //       data: 'div { color: foo(20, 22); }',
+  //       functions: {
+  //         foo: function(a, b) {
+  //           return new sass.types.Number(a.getValue() + b.getValue(), 'em');
+  //         }
+  //       }
+  //     });
 
-      assert.equal(result.css.toString().trim(), 'div {\n  color: 42em; }');
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), 'div {\n  color: 42em; }');
+  //     done();
+  //   });
 
-    it('should fail when returning anything other than a sass value from a custom function', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: 'div { color: foo(); }',
-          functions: {
-            'foo()': function() {
-              return {};
-            }
-          }
-        });
-      }, /A SassValue object was expected/);
+  //   it('should fail when returning anything other than a sass value from a custom function', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: 'div { color: foo(); }',
+  //         functions: {
+  //           'foo()': function() {
+  //             return {};
+  //           }
+  //         }
+  //       });
+  //     }, /A SassValue object was expected/);
 
-      done();
-    });
+  //     done();
+  //   });
 
-    it('should properly bubble up standard JS errors thrown by custom functions', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: 'div { color: foo(); }',
-          functions: {
-            'foo()': function() {
-              throw new RangeError('This is a test error');
-            }
-          }
-        });
-      }, /This is a test error/);
+  //   it('should properly bubble up standard JS errors thrown by custom functions', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: 'div { color: foo(); }',
+  //         functions: {
+  //           'foo()': function() {
+  //             throw new RangeError('This is a test error');
+  //           }
+  //         }
+  //       });
+  //     }, /This is a test error/);
 
-      done();
-    });
+  //     done();
+  //   });
 
-    it('should properly bubble up unknown errors thrown by custom functions', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: 'div { color: foo(); }',
-          functions: {
-            'foo()': function() {
-              throw {};
-            }
-          }
-        });
-      }, /unexpected error/);
+  //   it('should properly bubble up unknown errors thrown by custom functions', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: 'div { color: foo(); }',
+  //         functions: {
+  //           'foo()': function() {
+  //             throw {};
+  //           }
+  //         }
+  //       });
+  //     }, /unexpected error/);
 
-      done();
-    });
+  //     done();
+  //   });
 
-    it('should properly bubble up errors from sass value getters/setters/constructors', function(done) {
-      assert.throws(function() {
-        sass.renderSync({
-          data: 'div { color: foo(); }',
-          functions: {
-            'foo()': function() {
-              return sass.types.Boolean('foo');
-            }
-          }
-        });
-      }, /Expected one boolean argument/);
+  //   it('should properly bubble up errors from sass value getters/setters/constructors', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: 'div { color: foo(); }',
+  //         functions: {
+  //           'foo()': function() {
+  //             return sass.types.Boolean('foo');
+  //           }
+  //         }
+  //       });
+  //     }, /Expected one boolean argument/);
 
-      assert.throws(function() {
-        sass.renderSync({
-          data: 'div { color: foo(); }',
-          functions: {
-            'foo()': function() {
-              var ret = new sass.types.Number(42);
-              ret.setUnit(123);
-              return ret;
-            }
-          }
-        });
-      }, /Supplied value should be a string/);
+  //     assert.throws(function() {
+  //       sass.renderSync({
+  //         data: 'div { color: foo(); }',
+  //         functions: {
+  //           'foo()': function() {
+  //             var ret = new sass.types.Number(42);
+  //             ret.setUnit(123);
+  //             return ret;
+  //           }
+  //         }
+  //       });
+  //     }, /Supplied value should be a string/);
 
-      done();
-    });
-  });
+  //     done();
+  //   });
+  // });
 
-  describe('.renderSync({stats: {}})', function() {
-    var start = Date.now();
-    var result = sass.renderSync({
-      file: fixture('include-files/index.scss')
-    });
+  // describe('.renderSync({stats: {}})', function() {
+  //   var start = Date.now();
+  //   var result = sass.renderSync({
+  //     file: fixture('include-files/index.scss')
+  //   });
 
-    it('should provide a start timestamp', function(done) {
-      assert(typeof result.stats.start === 'number');
-      assert(result.stats.start >= start);
-      done();
-    });
+  //   it('should provide a start timestamp', function(done) {
+  //     assert(typeof result.stats.start === 'number');
+  //     assert(result.stats.start >= start);
+  //     done();
+  //   });
 
-    it('should provide an end timestamp', function(done) {
-      assert(typeof result.stats.end === 'number');
-      assert(result.stats.end >= result.stats.start);
-      done();
-    });
+  //   it('should provide an end timestamp', function(done) {
+  //     assert(typeof result.stats.end === 'number');
+  //     assert(result.stats.end >= result.stats.start);
+  //     done();
+  //   });
 
-    it('should provide a duration', function(done) {
-      assert(typeof result.stats.duration === 'number');
-      assert.equal(result.stats.end - result.stats.start, result.stats.duration);
-      done();
-    });
+  //   it('should provide a duration', function(done) {
+  //     assert(typeof result.stats.duration === 'number');
+  //     assert.equal(result.stats.end - result.stats.start, result.stats.duration);
+  //     done();
+  //   });
 
-    it('should contain the given entry file', function(done) {
-      assert.equal(result.stats.entry, resolveFixture('include-files/index.scss'));
-      done();
-    });
+  //   it('should contain the given entry file', function(done) {
+  //     assert.equal(result.stats.entry, resolveFixture('include-files/index.scss'));
+  //     done();
+  //   });
 
-    it('should contain an array of all included files', function(done) {
-      var expected = [
-        fixture('include-files/bar.scss').replace(/\\/g, '/'),
-        fixture('include-files/foo.scss').replace(/\\/g, '/'),
-        fixture('include-files/index.scss').replace(/\\/g, '/')
-      ].sort();
-      var actual = result.stats.includedFiles.sort();
+  //   it('should contain an array of all included files', function(done) {
+  //     var expected = [
+  //       fixture('include-files/bar.scss').replace(/\\/g, '/'),
+  //       fixture('include-files/foo.scss').replace(/\\/g, '/'),
+  //       fixture('include-files/index.scss').replace(/\\/g, '/')
+  //     ].sort();
+  //     var actual = result.stats.includedFiles.sort();
 
-      assert.equal(actual[0], expected[0]);
-      assert.equal(actual[1], expected[1]);
-      assert.equal(actual[2], expected[2]);
-      done();
-    });
+  //     assert.equal(actual[0], expected[0]);
+  //     assert.equal(actual[1], expected[1]);
+  //     assert.equal(actual[2], expected[2]);
+  //     done();
+  //   });
 
-    it('should contain array with the entry if there are no import statements', function(done) {
-      var expected = fixture('simple/index.scss').replace(/\\/g, '/');
+  //   it('should contain array with the entry if there are no import statements', function(done) {
+  //     var expected = fixture('simple/index.scss').replace(/\\/g, '/');
 
-      var result = sass.renderSync({
-        file: fixture('simple/index.scss')
-      });
+  //     var result = sass.renderSync({
+  //       file: fixture('simple/index.scss')
+  //     });
 
-      assert.deepEqual(result.stats.includedFiles, [expected]);
-      done();
-    });
+  //     assert.deepEqual(result.stats.includedFiles, [expected]);
+  //     done();
+  //   });
 
-    it('should state `data` as entry file', function(done) {
-      var result = sass.renderSync({
-        data: read(fixture('simple/index.scss'), 'utf8')
-      });
+  //   it('should state `data` as entry file', function(done) {
+  //     var result = sass.renderSync({
+  //       data: read(fixture('simple/index.scss'), 'utf8')
+  //     });
 
-      assert.equal(result.stats.entry, 'data');
-      done();
-    });
+  //     assert.equal(result.stats.entry, 'data');
+  //     done();
+  //   });
 
-    it('should contain an empty array as includedFiles', function(done) {
-      var result = sass.renderSync({
-        data: read(fixture('simple/index.scss'), 'utf8')
-      });
+  //   it('should contain an empty array as includedFiles', function(done) {
+  //     var result = sass.renderSync({
+  //       data: read(fixture('simple/index.scss'), 'utf8')
+  //     });
 
-      assert.deepEqual(result.stats.includedFiles, []);
-      done();
-    });
-  });
+  //     assert.deepEqual(result.stats.includedFiles, []);
+  //     done();
+  //   });
+  // });
 
-  describe('.info', function() {
-    var package = require('../package.json'),
-        info = sass.info;
+  // describe('.info', function() {
+  //   var package = require('../package.json'),
+  //       info = sass.info;
 
-    it('should return a correct version info', function(done) {
-      assert(info.indexOf(package.version) > 0);
-      assert(info.indexOf('(Wrapper)') > 0);
-      assert(info.indexOf('[JavaScript]') > 0);
-      assert(info.indexOf('[NA]') < 0);
-      assert(info.indexOf('(Sass Compiler)') > 0);
-      assert(info.indexOf('[C/C++]') > 0);
+  //   it('should return a correct version info', function(done) {
+  //     assert(info.indexOf(package.version) > 0);
+  //     assert(info.indexOf('(Wrapper)') > 0);
+  //     assert(info.indexOf('[JavaScript]') > 0);
+  //     assert(info.indexOf('[NA]') < 0);
+  //     assert(info.indexOf('(Sass Compiler)') > 0);
+  //     assert(info.indexOf('[C/C++]') > 0);
 
-      done();
-    });
-  });
+  //     done();
+  //   });
+  // });
 });
