@@ -1109,106 +1109,106 @@ describe('api', function() {
     });
   });
 
-  describe('.renderSync(options)', function() {
-    it('should compile sass to css with file', function(done) {
-      var expected = read(fixture('simple/expected.css'), 'utf8').trim();
-      var result = sass.renderSync({ file: fixture('simple/index.scss') });
+  // describe('.renderSync(options)', function() {
+  //   it('should compile sass to css with file', function(done) {
+  //     var expected = read(fixture('simple/expected.css'), 'utf8').trim();
+  //     var result = sass.renderSync({ file: fixture('simple/index.scss') });
 
-      assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
+  //     done();
+  //   });
 
-    it('should compile sass to css with outFile set to absolute url', function(done) {
-      var result = sass.renderSync({
-        file: fixture('simple/index.scss'),
-        sourceMap: true,
-        outFile: fixture('simple/index-test.css')
-      });
+  //   it('should compile sass to css with outFile set to absolute url', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('simple/index.scss'),
+  //       sourceMap: true,
+  //       outFile: fixture('simple/index-test.css')
+  //     });
 
-      assert.equal(JSON.parse(result.map).file, 'index-test.css');
-      done();
-    });
+  //     assert.equal(JSON.parse(result.map).file, 'index-test.css');
+  //     done();
+  //   });
 
-    it('should compile sass to css with outFile set to relative url', function(done) {
-      var result = sass.renderSync({
-        file: fixture('simple/index.scss'),
-        sourceMap: true,
-        outFile: './index-test.css'
-      });
+  //   it('should compile sass to css with outFile set to relative url', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('simple/index.scss'),
+  //       sourceMap: true,
+  //       outFile: './index-test.css'
+  //     });
 
-      assert.equal(JSON.parse(result.map).file, 'index-test.css');
-      done();
-    });
+  //     assert.equal(JSON.parse(result.map).file, 'index-test.css');
+  //     done();
+  //   });
 
-    it('should compile sass to css with outFile and sourceMap set to relative url', function(done) {
-      var result = sass.renderSync({
-        file: fixture('simple/index.scss'),
-        sourceMap: './deep/nested/index.map',
-        outFile: './index-test.css'
-      });
+  //   it('should compile sass to css with outFile and sourceMap set to relative url', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('simple/index.scss'),
+  //       sourceMap: './deep/nested/index.map',
+  //       outFile: './index-test.css'
+  //     });
 
-      assert.equal(JSON.parse(result.map).file, '../../index-test.css');
-      done();
-    });
+  //     assert.equal(JSON.parse(result.map).file, '../../index-test.css');
+  //     done();
+  //   });
 
-    it('should compile generate map with sourceMapRoot pass-through option', function(done) {
-      var result = sass.renderSync({
-        file: fixture('simple/index.scss'),
-        sourceMap: './deep/nested/index.map',
-        sourceMapRoot: 'http://test.com/',
-        outFile: './index-test.css'
-      });
+  //   it('should compile generate map with sourceMapRoot pass-through option', function(done) {
+  //     var result = sass.renderSync({
+  //       file: fixture('simple/index.scss'),
+  //       sourceMap: './deep/nested/index.map',
+  //       sourceMapRoot: 'http://test.com/',
+  //       outFile: './index-test.css'
+  //     });
 
-      assert.equal(JSON.parse(result.map).sourceRoot, 'http://test.com/');
-      done();
-    });
+  //     assert.equal(JSON.parse(result.map).sourceRoot, 'http://test.com/');
+  //     done();
+  //   });
 
-    it('should compile sass to css with data', function(done) {
-      var src = read(fixture('simple/index.scss'), 'utf8');
-      var expected = read(fixture('simple/expected.css'), 'utf8').trim();
-      var result = sass.renderSync({ data: src });
+  //   it('should compile sass to css with data', function(done) {
+  //     var src = read(fixture('simple/index.scss'), 'utf8');
+  //     var expected = read(fixture('simple/expected.css'), 'utf8').trim();
+  //     var result = sass.renderSync({ data: src });
 
-      assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
+  //     done();
+  //   });
 
-    it('should compile sass to css using indented syntax', function(done) {
-      var src = read(fixture('indent/index.sass'), 'utf8');
-      var expected = read(fixture('indent/expected.css'), 'utf8').trim();
-      var result = sass.renderSync({
-        data: src,
-        indentedSyntax: true
-      });
+  //   it('should compile sass to css using indented syntax', function(done) {
+  //     var src = read(fixture('indent/index.sass'), 'utf8');
+  //     var expected = read(fixture('indent/expected.css'), 'utf8').trim();
+  //     var result = sass.renderSync({
+  //       data: src,
+  //       indentedSyntax: true
+  //     });
 
-      assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
-      done();
-    });
+  //     assert.equal(result.css.toString().trim(), expected.replace(/\r\n/g, '\n'));
+  //     done();
+  //   });
 
-    it('should NOT compile empty data string', function(done) {
-      assert.throws(function() {
-        sass.renderSync({ data: '' });
-      }, /No input specified: provide a file name or a source string to process/ );
-      done();
-    });
+  //   it('should NOT compile empty data string', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({ data: '' });
+  //     }, /No input specified: provide a file name or a source string to process/ );
+  //     done();
+  //   });
 
-    it('should NOT compile without any input', function(done) {
-      assert.throws(function() {
-        sass.renderSync({});
-      }, /No input specified: provide a file name or a source string to process/);
-      done();
-    });
+  //   it('should NOT compile without any input', function(done) {
+  //     assert.throws(function() {
+  //       sass.renderSync({});
+  //     }, /No input specified: provide a file name or a source string to process/);
+  //     done();
+  //   });
 
-    // it('should throw error for bad input', function(done) {
-    //   assert.throws(function() {
-    //      sass.renderSync('somestring');
-    //   });
-    //   assert.throws(function() {
-    //     sass.renderSync({ data: '#navbar width 80%;' });
-    //   });
+  //   it('should throw error for bad input', function(done) {
+  //     assert.throws(function() {
+  //        sass.renderSync('somestring');
+  //     });
+  //     assert.throws(function() {
+  //       sass.renderSync({ data: '#navbar width 80%;' });
+  //     });
 
-    //   done();
-    // });
-  });
+  //     done();
+  //   });
+  // });
 
   describe('.renderSync(importer)', function() {
     var src = read(fixture('include-files/index.scss'), 'utf8');
