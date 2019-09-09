@@ -3,6 +3,9 @@
 
   branches:
     only:
+      - release
+      - /v\d\.\d\.\d/
+    except:
       - master
 
   configuration: release
@@ -51,6 +54,5 @@
       draft: true
       description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       on:
-        branch: master                 # release from master branch only
         APPVEYOR_REPO_TAG: true        # deploy on tag push only
         
