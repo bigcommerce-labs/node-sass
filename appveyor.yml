@@ -43,12 +43,6 @@
     # (which we use in node-sass-binaries repo)
     - ps: Get-ChildItem .\vendor\**\*.node | % { Push-AppveyorArtifact $_.FullName -FileName (($_.FullName.Split('\\') | Select-Object -Last 2) -join '_') }
 
-  environment:
-    APPVEYOR_REPO_TAG: true
-
-  artifacts:
-    - path: /.*binding\.node/
-
   deploy:
     - provider: GitHub
       auth_token:
