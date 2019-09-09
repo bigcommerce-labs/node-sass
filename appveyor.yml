@@ -43,13 +43,19 @@
     # (which we use in node-sass-binaries repo)
     - ps: Get-ChildItem .\vendor\**\*.node | % { Push-AppveyorArtifact $_.FullName -FileName (($_.FullName.Split('\\') | Select-Object -Last 2) -join '_') }
 
+  environment:
+    APPVEYOR_REPO_TAG: true
+
+  artifacts:
+    - path: /.*binding\.node/
 
   deploy:
     - provider: GitHub
       description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       artifact: /.*binding\.node/           # upload all NuGet packages to release assets
       auth_token:
-        secure: 2bD/oOwdfpSAmjd7n3m6Rpq9F+nLYd0q54pGJ1ckH+oI5Ex10SXNsF5mQobA+TfG
+        secure: FpeVl4faEVOiFs25q8GWjWs+RiKQan55KaEFouhN60xfk4qA+tv2b8bwSwmCZQDC
+      draft: false
       on:
         branch: master                # release from master branch only
         appveyor_repo_tag: true       # deploy on tag push only
