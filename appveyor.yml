@@ -51,11 +51,11 @@
 
   deploy:
     - provider: GitHub
-      description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
-      artifact: /.*binding\.node/           # upload all NuGet packages to release assets
       auth_token:
-        secure: FpeVl4faEVOiFs25q8GWjWs+RiKQan55KaEFouhN60xfk4qA+tv2b8bwSwmCZQDC
-      draft: false
+        secure: iErPM04bm05BGmeWt9UN/RnFSJzia+PPpKMFPfSDQF0gUigYM+2A1gpM5E/vfGVK
+      artifact: /.*binding\.node/
+      draft: true
+      description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       on:
         branch: master                # release from master branch only
         appveyor_repo_tag: true       # deploy on tag push only
