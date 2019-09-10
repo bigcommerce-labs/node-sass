@@ -17,7 +17,6 @@
   version: "{build}"
 
   build: off
-  test: off
 
   cache:
     - '%userprofile%\.node-gyp'
@@ -58,7 +57,9 @@
     - npm --version
     - git submodule update --init --recursive
     - npm install
-  
+
+  test_script: npm test
+
   before_deploy:
     # Save artifact with full qualified names of binding.node
     # (which we use in node-sass-binaries repo)
