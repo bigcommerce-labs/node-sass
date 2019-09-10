@@ -1,4 +1,4 @@
-msvs2015: &msvs2015
+msvs_2015: &msvs2015
   GYP_MSVS_VERSION: 2015
   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     
