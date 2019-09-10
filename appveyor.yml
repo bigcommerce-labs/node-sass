@@ -44,16 +44,10 @@
       - nodejs_version: 11
         GYP_MSVS_VERSION: 2015
         APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      - nodejs_version: 12
-        GYP_MSVS_VERSION: 2015
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       - nodejs_version: 10
         GYP_MSVS_VERSION: 2017
         APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       - nodejs_version: 11
-        GYP_MSVS_VERSION: 2017
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      - nodejs_version: 12
         GYP_MSVS_VERSION: 2017
         APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
@@ -84,7 +78,6 @@
       auth_token:
         secure: iErPM04bm05BGmeWt9UN/RnFSJzia+PPpKMFPfSDQF0gUigYM+2A1gpM5E/vfGVK
       artifact: /.*binding\.node/
-      draft: true
       description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       on:
         APPVEYOR_REPO_TAG: true        # deploy on tag push only

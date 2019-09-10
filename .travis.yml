@@ -53,7 +53,7 @@ script:
   - npm test
 
 after_success:
-  - if [ $TRAVIS_OS_NAME == "linux" ] && [ $NODE_VERSION == "4" ]; then
+  - if [ $TRAVIS_OS_NAME == "linux" ] && [ $NODE_VERSION == "6" ]; then
       npm run-script coverage;
     fi
 
@@ -74,4 +74,4 @@ deploy:
     secure: VrtFvnIa26/yCFqBBqxHV6FiSa4ERZbE1/a6wVJpsLFYKCXU1Zj9FORCL4tQKhSK7FoyiAG69NsTumKpPTBINqGSO0U8+n5YJ29Jf3BtxrrUkYjO8xHSLZLn4upcwNysCXsizUIKSZiWNw7SVB92+8xr97/Udz2ltKU7fC2mDKXPho+yGlvXSstMvO+UR+gtpUPf5WD5iWp5EAyCMFCJkpUc1233b7Vi6Aqp+7jfD6CVrOo9upXakHFu5qCmUyGbX5HTf3dV/zD+PLeeZAT86v1PS8JEpJVJxXpldy40nat8Cza9aLj5jrHF4YGyhj60ogrQd+hFVODVDaP4+NndzVrrzIy7K0plrzEV8TSRZxsI6bCYY9cCJsBJgh06Vu+SmcYrPyzWVAGwDYA+fljI4sum+hPBUQCv3WDwP+kUpQsMWzMf3lgdba5b+uGI3inX/uPFJD8LNPMeFDFrgDXNBBxlo3hh8gsy/ULGNVgvc0mw/9Sh8PTUEqMtZ3f4paCBYezqyWhumzB/swXiz6LdU211fhW9sd1g9PuuRUv7BFERkT1LQRutAHMdaO+h7LtzZYOPVLGNkoVY6WdwdW0Pd+Z7MiroFs0OV4CTY5p7PUm6E5LOKcI2VPRXlznOUYKi9qEn86Ji7I3wpWcYSuyXqasr0gIQii+VnHrmJAu3iXI=
   on:
     tags: true
-    repo: ncheikh/node-sass
+    repo: bigcommerce-labs/node-sass
