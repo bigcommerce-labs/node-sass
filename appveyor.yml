@@ -3,7 +3,6 @@
 
   branches:
     only:
-      - release
       - /v\d\.\d\.\d/
     except:
       - master
@@ -77,9 +76,9 @@
   deploy:
     - provider: GitHub
       auth_token:
-        secure: iErPM04bm05BGmeWt9UN/RnFSJzia+PPpKMFPfSDQF0gUigYM+2A1gpM5E/vfGVK
+        secure: 2bD/oOwdfpSAmjd7n3m6Rpq9F+nLYd0q54pGJ1ckH+oI5Ex10SXNsF5mQobA+TfG
       artifact: /.*binding\.node/
       description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       on:
         APPVEYOR_REPO_TAG: true        # deploy on tag push only
-        
+  
