@@ -14,8 +14,10 @@ jobs: # a collection of steps
       - run:
           name: test
           command: npm test
-      - store_artifacts:
-          path: vendor/
+      - persist_to_workspace:
+          root: .
+          paths:
+            - vendor/*
 
   build-linux-node-8: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
@@ -34,8 +36,10 @@ jobs: # a collection of steps
       - run:
           name: test
           command: npm test
-      - store_artifacts:
-          path: vendor/
+      - persist_to_workspace:
+        root: .
+        paths:
+          - vendor/*
 
   build-linux-node-10: # runs not using Workflows must have a `build` job as entry point
     # working_directory: ~/app
@@ -68,18 +72,18 @@ jobs: # a collection of steps
           at: ./artifacts
       - run:
           name: "Publish Release on GitHub"
-          command: "ls ./artifacts"
+          command: "ls ./artifacts/vendor"
 
 workflows:
   version: 2
   build:
     jobs:
-      # - build-linux-node-6
-      # - build-linux-node-8
+      - build-linux-node-6
+      - build-linux-node-8
       - build-linux-node-10
 
       - publish-github-release:
           requires:
-            # - build-linux-node-6
-            # - build-linux-node-8
+            - build-linux-node-6
+            - build-linux-node-8
             - build-linux-node-10
