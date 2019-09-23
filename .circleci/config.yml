@@ -59,10 +59,13 @@ jobs: # a collection of steps
       - run:
           name: test
           command: npm test
+      - run:
+          name: release
+          command: node scripts/circle-release.js
       - persist_to_workspace:
           root: .
           paths:
-            - vendor/*
+            - release/*
 
   publish-github-release:
     docker:
@@ -82,20 +85,24 @@ workflows:
   version: 2
   build:
     jobs:
-      - build-linux-node-6:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
+      # - build-linux-node-6:
+      #     filters:
+      #       tags:
+      #         only: /v\d+\.\d+\.\d+$/
       # - build-linux-node-8:
       #     filters:
       #       tags:
       #         only: /v\d+\.\d+\.\d+$/
+      - build-linux-node-10:
+          filters:
+            tags:
+              only: /v\d+\.\d+\.\d+$/
 
       - publish-github-release:
           requires:
-            - build-linux-node-6
+            # - build-linux-node-6
             # - build-linux-node-8
-            # - build-linux-node-10
+            - build-linux-node-10
 
           filters:
             branches:
