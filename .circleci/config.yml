@@ -75,11 +75,11 @@ jobs: # a collection of steps
           at: ./artifacts
       - run:
           name: "Publish Release on GitHub"
-          command: "ls ./artifacts/vendor"
+          command: "ls ./artifacts/release"
       - run:
           name: "Publish Release on GitHub"
           command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts/vendor/linux-x64-48/binding.node
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts/release/*
 
 workflows:
   version: 2
