@@ -54,8 +54,10 @@ jobs: # a collection of steps
       - run:
           name: test
           command: npm test
-      - store_artifacts:
-          path: vendor/
+      - persist_to_workspace:
+          root: /artifacts
+          paths:
+            - vendor/*
 
   publish-github-release:
     docker:
