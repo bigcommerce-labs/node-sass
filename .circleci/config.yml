@@ -98,5 +98,7 @@ workflows:
             # - build-linux-node-10
 
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /v\d+\.\d+\.\d+$/
