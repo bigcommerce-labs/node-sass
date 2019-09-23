@@ -37,9 +37,9 @@ jobs: # a collection of steps
           name: test
           command: npm test
       - persist_to_workspace:
-        root: .
-        paths:
-          - vendor/*
+          root: .
+          paths:
+            - vendor/*
 
   build-linux-node-10: # runs not using Workflows must have a `build` job as entry point
     # working_directory: ~/app
