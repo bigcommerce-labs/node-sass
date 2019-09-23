@@ -55,7 +55,7 @@ jobs: # a collection of steps
           name: test
           command: npm test
       - persist_to_workspace:
-          root: /artifacts
+          root: /tmp/artifacts
           paths:
             - vendor/*
 
