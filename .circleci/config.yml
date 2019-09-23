@@ -39,9 +39,24 @@ jobs: # a collection of steps
           command: npm test
       - store_artifacts:
           path: vendor/
+
+  publish-github-release:
+    docker:
+      - image: cibuilds/github:0.10
+    steps:
+      - attach_workspace:
+          at: ./artifacts
+      - run:
+          name: "Publish Release on GitHub"
+          command: "ls ./artifacts"
+
 workflows:
   version: 2
   build:
     jobs:
       - build-linux-node-6
       - build-linux-node-8
+      - publish-github-release:
+          requires:
+            - build-linux-node-6
+            - build-linux-node-8
