@@ -72,9 +72,34 @@ jobs:
           paths:
             - release/*
 
-  build-linux-node-12:
+  build-linux-node-11:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:11
+    steps: 
+      - checkout
+      - run:
+          name: submodule
+          command: git submodule update --init --recursive
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: test
+          command: npm test
+      - run:
+          name: release
+          command: node scripts/circle-release.js
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*
+
+  build-darwin-node-8:
+    macos:
+      xcode: "9.2.0"
     steps: 
       - checkout
       - run:
@@ -121,6 +146,32 @@ jobs:
           root: .
           paths:
             - release/*
+
+  build-darwin-node-12:
+    macos:
+      xcode: "11.0.0"
+    steps: 
+      - checkout
+      - run:
+          name: submodule
+          command: git submodule update --init --recursive
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: test
+          command: npm test
+      - run:
+          name: release
+          command: node scripts/circle-release.js
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*
+            
             
   publish-github-release:
     docker:
@@ -152,7 +203,11 @@ workflows:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-12:
+      - build-linux-node-11:
+          filters:
+            tags:
+              only: /v\d+\.\d+\.\d+$/
+      - build-darwin-node-8:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
@@ -166,7 +221,8 @@ workflows:
             - build-linux-node-6
             - build-linux-node-8
             - build-linux-node-10
-            - build-linux-node-12
+            - build-linux-node-11
+            - build-darwin-node-8
             - build-darwin-node-10
 
           filters:
