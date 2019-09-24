@@ -1,4 +1,8 @@
-version: 2 
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
 jobs: 
   build-linux-node-6:
     docker: 
@@ -147,9 +151,9 @@ jobs:
           paths:
             - release/*
 
-  build-darwin-node-12:
-    macos:
-      xcode: "11.0.0"
+  build-win-vs19-node-10:
+    executor:
+      name: win/vs2019
     steps: 
       - checkout
       - run:
@@ -212,6 +216,11 @@ workflows:
             tags:
               only: /v\d+\.\d+\.\d+$/
       - build-darwin-node-10:
+          filters:
+            tags:
+              only: /v\d+\.\d+\.\d+$/  
+
+      - build-win-vs19-node-10:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
