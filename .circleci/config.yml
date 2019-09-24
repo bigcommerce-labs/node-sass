@@ -16,7 +16,7 @@ commands:
           command: npm test
 
   release:
-    description: "Checkout, build, and test the package"
+    description: "Generate release artifact"
     steps:
       - run:
           name: release
