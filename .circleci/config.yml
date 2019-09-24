@@ -133,6 +133,7 @@ jobs:
       - release
 
   build-win-vs19-node-6:
+    resource_class: large
     executor:
       name: win/vs2019
     steps: 
