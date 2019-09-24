@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@1.0.0
-
 commands:
   build:
     description: "Checkout, build, and test the package"
