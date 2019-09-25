@@ -75,7 +75,7 @@
   deploy:
     - provider: GitHub
       auth_token:
-        secure: 2bD/oOwdfpSAmjd7n3m6Rpq9F+nLYd0q54pGJ1ckH+oI5Ex10SXNsF5mQobA+TfG
+        secure: re2Ux+5GEHeYAAspcbJibHJdHA0Vtq0CfhQC10XG84zKOt5n0JjYSoaRR7O0306C
       artifact: /.*binding\.node/
       description: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
       on:
