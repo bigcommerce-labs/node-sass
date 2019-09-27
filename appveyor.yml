@@ -1,6 +1,12 @@
 -
   os: Visual Studio 2015
 
+  branches:
+    only:
+      - /v\d\.\d\.\d/
+    except:
+      - master
+
   configuration: release
 
   platform:
