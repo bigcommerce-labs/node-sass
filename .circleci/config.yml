@@ -202,7 +202,7 @@ workflows:
             - build-darwin-node-11
 
           filters:
-            branches:
-              ignore: /.*/
+            # branches:
+            #   ignore: /.*/
             tags:
               only: /v\d+\.\d+\.\d+$/
