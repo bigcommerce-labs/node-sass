@@ -56,6 +56,13 @@ jobs:
       - build
       - release
 
+  build-linux-node-7:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - build
+      - release
+
   build-linux-node-8:
     docker:
       - image: circleci/node:8
@@ -90,6 +97,15 @@ jobs:
     steps:
       - install-node:
           version: 6
+      - build
+      - release
+
+  build-darwin-node-7:
+    macos:
+      xcode: "10.0.0"
+    steps:
+      - install-node:
+          version: 7
       - build
       - release
 
@@ -148,11 +164,13 @@ workflows:
   build:
     jobs:
       - build-linux-node-6
+      - build-linux-node-7
       - build-linux-node-8
       - build-linux-node-9
       - build-linux-node-10
       - build-linux-node-11
       - build-darwin-node-6
+      - build-darwin-node-7
       - build-darwin-node-8
       - build-darwin-node-9
       - build-darwin-node-10
@@ -161,11 +179,13 @@ workflows:
       - publish-github-release:
           requires:
             - build-linux-node-6
+            - build-linux-node-7
             - build-linux-node-8
             - build-linux-node-9
             - build-linux-node-10
             - build-linux-node-11
             - build-darwin-node-6
+            - build-darwin-node-7
             - build-darwin-node-8
             - build-darwin-node-9
             - build-darwin-node-10
