@@ -134,4 +134,3 @@
     - npm --version
     - git submodule update --init --recursive
     - npm install
-    - npm test
