@@ -175,39 +175,39 @@ workflows:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-9
+      - build-linux-node-9:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-10
+      - build-linux-node-10:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-11
+      - build-linux-node-11:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-6
+      - build-darwin-node-6:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-7
+      - build-darwin-node-7:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-8
+      - build-darwin-node-8:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-9
+      - build-darwin-node-9:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-10
+      - build-darwin-node-10:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-11
+      - build-darwin-node-11:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
