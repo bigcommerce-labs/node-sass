@@ -141,65 +141,35 @@ jobs:
       - run:
           name: "Publish Release on GitHub"
           command: |
-            ghr -t ${CIRCLE_CI_GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./artifacts/release/
+            ghr -t ${CIRCLE_CI_GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} 21 ./artifacts/release
 
 workflows:
   version: 2
   build:
     jobs:
-      - build-linux-node-6:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-8:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-9:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-10:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-11:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-6:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-8:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-9:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-10:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-11:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
+      # - build-linux-node-6
+      # - build-linux-node-8
+      # - build-linux-node-9
+      # - build-linux-node-10
+      - build-linux-node-11
+      # - build-darwin-node-6
+      # - build-darwin-node-8
+      # - build-darwin-node-9
+      # - build-darwin-node-10
+      # - build-darwin-node-11
 
       - publish-github-release:
           requires:
-            - build-linux-node-6
-            - build-linux-node-8
-            - build-linux-node-9
-            - build-linux-node-10
+            # - build-linux-node-6
+            # - build-linux-node-8
+            # - build-linux-node-9
+            # - build-linux-node-10
             - build-linux-node-11
-            - build-darwin-node-6
-            - build-darwin-node-8
-            - build-darwin-node-9
-            - build-darwin-node-10
-            - build-darwin-node-11
+            # - build-darwin-node-6
+            # - build-darwin-node-8
+            # - build-darwin-node-9
+            # - build-darwin-node-10
+            # - build-darwin-node-11
 
           filters:
             # branches:
