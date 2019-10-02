@@ -156,9 +156,8 @@ jobs:
           command: "ls ./artifacts/release"
       - run:
           name: "Publish Release on GitHub"
-          # ${CIRCLE_TAG}
           command: |
-            ghr -t ${CIRCLE_CI_GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} test ./artifacts/release/
+            ghr -t ${CIRCLE_CI_GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./artifacts/release/
 
 workflows:
   version: 2
@@ -229,7 +228,7 @@ workflows:
             - build-darwin-node-11
 
           filters:
-            # branches:
-            #   ignore: /.*/
+            branches:
+              ignore: /.*/
             tags:
               only: /v\d+\.\d+\.\d+$/
