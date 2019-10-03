@@ -212,7 +212,7 @@ function testBinary(options) {
 
     console.log('Binary is fine; exiting.');
   } catch (e) {
-    console.log(['Problem with the binary.', 'Manual build incoming.'].join(eol));
+    console.log([`Problem with the binary: ${e}`, 'Manual build incoming.'].join(eol));
 
     return build(options);
   }
