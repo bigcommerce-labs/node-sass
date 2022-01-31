@@ -2,10 +2,10 @@ var assert = require('assert'),
     fs = require('fs'),
     exists = fs.existsSync,
     path = require('path'),
-    // read = fs.readFileSync,
-    // sass = process.env.NODESASS_COV
-    //   ? require('../lib-cov')
-    //   : require('../lib'),
+    read = fs.readFileSync,
+    sass = process.env.NODESASS_COV
+      ? require('../lib-cov')
+      : require('../lib'),
     util = require('./util');
 
 describe('spec', function() {
@@ -38,25 +38,22 @@ describe('spec', function() {
 
         if (exists(t.src)) {
           it(test, function(done) {
-            // var expected = util.normalize(read(t.expected, 'utf8'));
-            assert(true);
-            done();
-            return;
-            // sass.render({
-            //   file: t.src,
-            //   includePaths: t.paths
-            // }, function(error, result) {
-            //   console.log(t);
-            //   if (t.error) {
-            //     assert(error);
-            //   } else {
-            //     assert(!error);
-            //   }
-            //   if (expected) {
-            //     assert.equal(util.normalize(result.css.toString()), expected);
-            //   }
-            //   done();
-            // });
+            var expected = util.normalize(read(t.expected, 'utf8'));
+            sass.render({
+              file: t.src,
+              includePaths: t.paths
+            }, function(error, result) {
+              console.log(t);
+              if (t.error) {
+                assert(error);
+              } else {
+                assert(!error);
+              }
+              if (expected) {
+                assert.equal(util.normalize(result.css.toString()), expected);
+              }
+              done();
+            });
           });
         }
       });

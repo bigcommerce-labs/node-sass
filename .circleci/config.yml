@@ -55,30 +55,10 @@ commands:
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
 jobs:
-  build-linux-node-10:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - build
-      - release
-
-  build-linux-node-11:
-    docker:
-      - image: circleci/node:11
-    steps:
-      - build
-      - release
 
   build-linux-node-12:
     docker:
       - image: circleci/node:12
-    steps:
-      - build
-      - release
-
-  build-linux-node-13:
-    docker:
-      - image: circleci/node:13
     steps:
       - build
       - release
@@ -91,46 +71,12 @@ jobs:
       - release
       - run: npm -v
 
-  build-linux-node-16:
-    docker:
-      - image: circleci/node:16
-    steps:
-      - build
-      - release
-
-  build-darwin-node-10:
-    macos:
-      xcode: "13.0.0"
-    steps:
-      - install-node:
-          version: 10
-      - build
-      - release
-
-  build-darwin-node-11:
-    macos:
-      xcode: "13.0.0"
-    steps:
-      - install-node:
-          version: 11
-      - build
-      - release
-
   build-darwin-node-12:
     macos:
       xcode: "13.0.0"
     steps:
       - install-node:
           version: 12
-      - build
-      - release
-  
-  build-darwin-node-13:
-    macos:
-      xcode: "13.0.0"
-    steps:
-      - install-node:
-          version: 13
       - build
       - release
   
@@ -172,27 +118,11 @@ workflows:
   version: 2
   build:
     jobs:
-      - build-linux-node-10:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-linux-node-11:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
       - build-linux-node-12:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
       - build-linux-node-14:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-10:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-11:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
@@ -211,12 +141,8 @@ workflows:
 
       - publish-github-release:
           requires:
-            - build-linux-node-10
-            - build-linux-node-11
             - build-linux-node-12
             - build-linux-node-14
-            - build-darwin-node-10
-            - build-darwin-node-11
             - build-darwin-node-12
             - build-darwin-node-14
             - build-win-node-14
