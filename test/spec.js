@@ -58,7 +58,7 @@ describe('spec', function() {
                 if (process._getActiveHandles().length > 0) {
                   console.log(`Removing ${process._getActiveHandles().length} handlers`);
                   process.removeAllListeners('exit');
-                  process.exit(1);
+                  process.exit(0);
                 }
               }
               done();
