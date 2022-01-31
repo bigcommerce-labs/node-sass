@@ -92,6 +92,7 @@ jobs:
   build-win-node-14:
     executor:
       name: win/default
+      size: large
     steps:
       - run: Install-Module nvm
       - run: nvm install 14.18.3
