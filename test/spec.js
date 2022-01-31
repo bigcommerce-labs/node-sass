@@ -62,7 +62,9 @@ describe('spec', function() {
                   process.exit();
                 }
               }
-              console.log('Exit!');
+              console.log('Exit2!');
+              process.removeAllListeners('exit');
+              process.exitCode = 0;
               process.exit();
               done();
             });
