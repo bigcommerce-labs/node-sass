@@ -43,7 +43,6 @@ describe('spec', function() {
               file: t.src,
               includePaths: t.paths
             }, function(error, result) {
-              console.log(t);
               if (t.error) {
                 assert(error);
               } else {

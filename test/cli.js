@@ -32,6 +32,7 @@ describe('cli', function() {
       bin.stdout.setEncoding('utf8');
       bin.stdout.once('data', function(data) {
         assert.equal(data.trim(), expected.replace(/\r\n/g, '\n'));
+        src.destroy();
         done();
       });
 
@@ -46,6 +47,7 @@ describe('cli', function() {
       bin.stdout.setEncoding('utf8');
       bin.stdout.once('data', function(data) {
         assert.equal(data.trim(), expected.replace(/\r\n/g, '\n'));
+        src.destroy();
         done();
       });
 
@@ -60,6 +62,7 @@ describe('cli', function() {
       bin.stdout.setEncoding('utf8');
       bin.stdout.once('data', function(data) {
         assert.equal(data.trim(), expected.replace(/\r\n/g, '\n'));
+        src.destroy();
         done();
       });
 
@@ -74,6 +77,7 @@ describe('cli', function() {
       bin.stdout.setEncoding('utf8');
       bin.stdout.once('data', function(data) {
         assert.equal(data.trim(), expected.replace(/\r\n/g, '\n'));
+        src.destroy();
         done();
       });
 
@@ -88,6 +92,7 @@ describe('cli', function() {
       bin.stdout.setEncoding('utf8');
       bin.stdout.once('data', function(data) {
         assert.equal(data.trim(), expected.replace(/\r\n/g, '\n'));
+        src.destroy();
         done();
       });
 
