@@ -30,7 +30,7 @@
     "install": "node scripts/install.js",
     "postinstall": "node scripts/build.js",
     "pretest": "node_modules/.bin/jshint bin lib scripts test",
-    "test": "node_modules/.bin/mocha --exit test"
+    "test": "node_modules/.bin/mocha test"
   },
   "files": [
     "bin",
@@ -66,7 +66,7 @@
     "coveralls": "^2.11.4",
     "istanbul": "^0.3.18",
     "jshint": "^2.8.0",
-    "mocha": "^9.2.0",
+    "mocha": "^2.2.5",
     "mocha-lcov-reporter": "^0.0.2",
     "rimraf": "^2.4.2"
   }
