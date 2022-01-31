@@ -62,6 +62,8 @@ describe('spec', function() {
                   process.exit();
                 }
               }
+              console.log('Exit!');
+              process.exit();
               done();
             });
           });
