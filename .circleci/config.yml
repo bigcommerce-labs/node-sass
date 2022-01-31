@@ -1,6 +1,9 @@
 version: 2.1
 
 
+# Windows build is disabled, because npm test fails on windonws environment doesn't exist even when all the tests pass
+# (note: pending tests are skipped tests)
+# 
 # orbs:
 #   win: circleci/windows@2.4.1
 
@@ -89,9 +92,6 @@ jobs:
       - build
       - release
 
-  # npm test failing on windonws environment due to timeout even when all the tests fail
-  # (note: pending tests are skipped tests)
-  # 
   # build-win-node-14:
   #   executor:
   #     name: win/default
@@ -138,10 +138,10 @@ workflows:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
-      - build-win-node-14:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
+      # - build-win-node-14:
+      #     filters:
+      #       tags:
+      #         only: /v\d+\.\d+\.\d+$/
 
       - publish-github-release:
           requires:
