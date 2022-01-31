@@ -29,6 +29,7 @@ describe('spec', function() {
     });
   });
 
+  let i = 0;
   Object.keys(suites).forEach(function(suite) {
     var tests = Object.keys(suites[suite]);
 
@@ -37,6 +38,7 @@ describe('spec', function() {
         var t = suites[suite][test];
 
         if (exists(t.src)) {
+          i += 1;
           it(test, function(done) {
             var expected = util.normalize(read(t.expected, 'utf8'));
             sass.render({
@@ -50,6 +52,13 @@ describe('spec', function() {
               }
               if (expected) {
                 assert.equal(util.normalize(result.css.toString()), expected);
+              }
+              i -= 1;
+              if (i === 0) {
+                if (process._getActiveHandles().length > 0) {
+                  console.log(`Removing ${process._getActiveHandles().length} handlers`);
+                  process.removeAllListeners('exit');
+                }
               }
               done();
             });
