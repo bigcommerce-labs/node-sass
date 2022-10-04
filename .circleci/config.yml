@@ -40,7 +40,7 @@ commands:
     parameters:
       version:
         type: integer
-        default: 10
+        default: 14
     steps:
       - run:
           name: install
@@ -59,13 +59,6 @@ commands:
             echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
 jobs:
 
-  build-linux-node-12:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - build
-      - release
-
   build-linux-node-14:
     docker:
       - image: circleci/node:14
@@ -73,15 +66,6 @@ jobs:
       - build
       - release
       - run: npm -v
-
-  build-darwin-node-12:
-    macos:
-      xcode: "13.0.0"
-    steps:
-      - install-node:
-          version: 12
-      - build
-      - release
   
   build-darwin-node-14:
     macos:
@@ -122,15 +106,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - build-linux-node-12:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
       - build-linux-node-14:
-          filters:
-            tags:
-              only: /v\d+\.\d+\.\d+$/
-      - build-darwin-node-12:
           filters:
             tags:
               only: /v\d+\.\d+\.\d+$/
@@ -145,9 +121,7 @@ workflows:
 
       - publish-github-release:
           requires:
-            - build-linux-node-12
             - build-linux-node-14
-            - build-darwin-node-12
             - build-darwin-node-14
             # - build-win-node-14
 
