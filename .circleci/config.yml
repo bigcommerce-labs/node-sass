@@ -17,6 +17,9 @@ commands:
           command: git submodule update --init --recursive
       - run:
           name: install
+          command: npm i -g npm@latest
+      - run:
+          name: install
           command: npm install
       - run:
           name: test
