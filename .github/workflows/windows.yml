@@ -8,16 +8,14 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     strategy:
       fail-fast: false
       matrix:
         node:
-          - 16
-          - 18
-          - 19
           - 20
+          - 22
 
         architecture:
           - x64
@@ -32,15 +30,23 @@ jobs:
           node-version: ${{ matrix.node }}
           architecture: ${{ matrix.architecture }}
 
+      - run: choco install python visualstudio2017-workload-vctools -y
+      # - run: npx node-gyp configure
+      # - name: Install Visual Studio 2022 Build Tools
+      #   run: |
+      #     choco install python visualstudio2022-workload-vctools -y
+      
+      # - run: npm config set msvs_version 2019
       - name: Install packages
         run: npm install
         env:
           SKIP_SASS_BINARY_DOWNLOAD_FOR_CI: true
+          # GYP_MSVS_VERSION: 2019  # Keep in sync with the Visual Studio version installed above
 
       - name: Run tests
         run: npm test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: github.repository_owner == 'sass' && github.event_name != 'pull_request'
         with:
           name: ${{ matrix.node }}-${{ matrix.architecture }}

@@ -14,16 +14,14 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - 16
-          - 18
-          - 19
           - 20
+          - 22
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
 
@@ -35,7 +33,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: github.repository_owner == 'sass' && github.event_name != 'pull_request'
         with:
           name: ${{ matrix.node }}
