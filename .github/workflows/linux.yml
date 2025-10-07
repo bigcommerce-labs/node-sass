@@ -22,6 +22,10 @@ jobs:
             gcc: "gcc-12"
             gpp: "g++-12"
             os: ubuntu-24.04
+          - node: 24
+            gcc: "gcc-12"
+            gpp: "g++-12"
+            os: ubuntu-24.04
 
 
     steps:

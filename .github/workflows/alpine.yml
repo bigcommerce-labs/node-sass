@@ -17,6 +17,7 @@ jobs:
         node:
           - 20
           - 22
+          - 24
 
     steps:
       - name: Install Alpine build tools
