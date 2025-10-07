@@ -20,7 +20,6 @@ jobs:
 
         architecture:
           - x64
-          - x86
 
     steps:
       - uses: actions/checkout@v4
@@ -32,12 +31,6 @@ jobs:
           architecture: ${{ matrix.architecture }}
 
       - run: choco install python visualstudio2017-workload-vctools -y
-      # - run: npx node-gyp configure
-      # - name: Install Visual Studio 2022 Build Tools
-      #   run: |
-      #     choco install python visualstudio2022-workload-vctools -y
-      
-      # - run: npm config set msvs_version 2019
       - name: Install packages
         run: npm install
         env:
