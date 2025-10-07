@@ -14,22 +14,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - node: 16
-            gcc: "gcc-8"
-            gpp: "g++-8"
-            os: ubuntu-20.04
-          - node: 18
-            gcc: "gcc-8"
-            gpp: "g++-8"
-            os: ubuntu-20.04
-          - node: 19
-            gcc: "gcc-8"
-            gpp: "g++-8"
-            os: ubuntu-20.04
           - node: 20
             gcc: "gcc-10"
             gpp: "g++-10"
             os: ubuntu-22.04
+          - node: 22
+            gcc: "gcc-12"
+            gpp: "g++-12"
+            os: ubuntu-24.04
+          - node: 24
+            gcc: "gcc-12"
+            gpp: "g++-12"
+            os: ubuntu-24.04
 
 
     steps:
@@ -55,7 +51,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: github.repository_owner == 'sass' && github.event_name != 'pull_request'
         with:
           name: ${{ matrix.node }}
