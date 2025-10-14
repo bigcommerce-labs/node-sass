@@ -1,10 +1,6 @@
 # node-sass
 
-**Warning:** [Node Sass has reached end of life]. It will receive no more
-releases, even for security fixes. Projects that still use it should move onto
-[Dart Sass](https://sass-lang.com/dart-sass).
-
-[Node Sass has reached end of life]: https://sass-lang.com/blog/node-sass-is-end-of-life
+This is a maintained fork of node-sass, originally created by the node-sass team.
 
 ## Node version support policy
 
