@@ -32,7 +32,7 @@ namespace Sass {
       // operation is undefined if one is not a number
       if (!lhs || !rhs) throw Exception::UndefinedOperation(lhs, rhs, Sass_OP::EQ);
       // use compare operator from ast node
-      return lhs->eq(*rhs);
+      return *lhs == *rhs;
     }
 
     /* static function, throws OperationError, has no pstate or traces */
