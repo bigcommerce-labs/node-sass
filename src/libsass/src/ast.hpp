@@ -1505,7 +1505,7 @@ namespace Sass {
         if (!(m && name() == m->name())) return false;
         if (!(m && arguments()->length() == m->arguments()->length())) return false;
         for (size_t i =0, L = arguments()->length(); i < L; ++i)
-          if (!(*(*arguments())[i] == *(*m->arguments())[i])) return false;
+          if (!((*arguments())[i]->eq(*(*m->arguments())[i]))) return false;
         return true;
       }
       catch (std::bad_cast&)
