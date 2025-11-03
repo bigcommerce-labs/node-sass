@@ -385,10 +385,10 @@ namespace Sass {
 
   bool Selector_Schema::operator== (const Selector& rhs) const
   {
-    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return *this == static_cast<const Selector_List&>(*sl);
-    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return *this == static_cast<const Simple_Selector&>(*sp);
-    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return *this == static_cast<const Complex_Selector&>(*cs);
-    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return *this == static_cast<const Compound_Selector&>(*ch);
+    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return *this == *sl;
+    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return *this == *sp;
+    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return *this == *cs;
+    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return *this == *ch;
     throw std::runtime_error("invalid selector base classes to compare");
   }
 
@@ -403,7 +403,7 @@ namespace Sass {
 
   bool Simple_Selector::operator== (const Selector& rhs) const
   {
-    if (Simple_Selector_Ptr_Const sp = Cast<Simple_Selector>(&rhs)) return *this == static_cast<const Simple_Selector&>(*sp);
+    if (Simple_Selector_Ptr_Const sp = Cast<Simple_Selector>(&rhs)) return *this == *sp;
     return false;
   }
 
@@ -760,7 +760,7 @@ namespace Sass {
   {
     if (Pseudo_Selector_Ptr_Const w = Cast<Pseudo_Selector>(&rhs))
     {
-      return *this == static_cast<const Pseudo_Selector&>(*w);
+      return *this == *w;
     }
     return is_ns_eq(rhs) &&
            name() == rhs.name();
@@ -802,7 +802,7 @@ namespace Sass {
   {
     if (Wrapped_Selector_Ptr_Const w = Cast<Wrapped_Selector>(&rhs))
     {
-      return *this == static_cast<const Wrapped_Selector&>(*w);
+      return *this == *w;
     }
     return is_ns_eq(rhs) &&
            name() == rhs.name();
@@ -1877,7 +1877,7 @@ namespace Sass {
   bool Number::operator== (const Expression& rhs) const
   {
     if (auto rhsnr = Cast<Number>(&rhs)) {
-      return *this == static_cast<const Number&>(*rhsnr);
+      return *this == *rhsnr;
     }
     return false;
   }
