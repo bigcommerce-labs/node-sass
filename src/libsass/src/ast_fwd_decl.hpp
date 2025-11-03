@@ -382,7 +382,7 @@ namespace Sass {
       if (dynamic_cast<Number*>(lhs.ptr()))
         if (dynamic_cast<Number*>(rhs.ptr()))
           return lhs->hash() == rhs->hash();
-      return !lhs.isNull() && !rhs.isNull() && lhs->eq(*rhs);
+      return !lhs.isNull() && !rhs.isNull() && *lhs == *rhs;
     }
   };
 
