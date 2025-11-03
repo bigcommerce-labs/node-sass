@@ -459,7 +459,7 @@ namespace Sass {
         if (!parent ||
             parent->statement_type() != Statement::MEDIA ||
             node->node()->statement_type() != Statement::MEDIA ||
-            (m1 && m2 && m1->media_queries()->eq(*m2->media_queries()))
+            (m1 && m2 && *m1->media_queries() == *m2->media_queries())
           )
         {
           ss = node->node();
