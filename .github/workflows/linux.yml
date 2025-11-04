@@ -20,7 +20,7 @@ jobs:
             os: ubuntu-22.04
           - node: 22
             gcc: "gcc"      # Use default gcc
-            gpp: "g++"      # Use default g++
+            gpp: "g++-12"      # Use default g++
             os: ubuntu-latest
           - node: 24
             cc: "clang"
