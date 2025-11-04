@@ -39,8 +39,13 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Setup GCC/G++
+        if: matrix.gcc != null && matrix.gpp != null
         run: sudo apt-get install ${{ matrix.gcc }} ${{ matrix.gpp }}
-
+        
+      - name: Setup Clang
+        if: matrix.cc == 'clang'
+        run: sudo apt-get install clang clang++
+  
       - name: Install packages
         run: npm install --unsafe-perm
         env:
