@@ -348,10 +348,10 @@ namespace Sass {
 
   bool Complex_Selector::operator== (const Selector& rhs) const
   {
-    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return this->eq(*sl);
-    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return this->eq(*sp);
-    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return this->eq(*cs);
-    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return this->eq(*ch);
+    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return *this == *sl;
+    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return *this == *sp;
+    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return *this == *cs;
+    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return *this == *ch;
     throw std::runtime_error("invalid selector base classes to compare");
   }
 
@@ -367,10 +367,10 @@ namespace Sass {
 
   bool Compound_Selector::operator== (const Selector& rhs) const
   {
-    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return this->eq(*sl);
-    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return this->eq(*sp);
-    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return this->eq(*cs);
-    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return this->eq(*ch);
+    if (const Selector_List* sl = Cast<Selector_List>(&rhs)) return *this == *sl;
+    if (const Simple_Selector* sp = Cast<Simple_Selector>(&rhs)) return *this == *sp;
+    if (const Complex_Selector* cs = Cast<Complex_Selector>(&rhs)) return *this == *cs;
+    if (const Compound_Selector* ch = Cast<Compound_Selector>(&rhs)) return *this == *ch;
     throw std::runtime_error("invalid selector base classes to compare");
   }
 
@@ -440,9 +440,9 @@ namespace Sass {
   bool Selector_List::operator== (const Selector& rhs) const
   {
     // solve the double dispatch problem by using RTTI information via dynamic cast
-    if (Selector_List_Ptr_Const sl = Cast<Selector_List>(&rhs)) { return this->eq(*sl); }
-    else if (Complex_Selector_Ptr_Const cpx = Cast<Complex_Selector>(&rhs)) { return this->eq(*cpx); }
-    else if (Compound_Selector_Ptr_Const cpd = Cast<Compound_Selector>(&rhs)) { return this->eq(*cpd); }
+    if (Selector_List_Ptr_Const sl = Cast<Selector_List>(&rhs)) { return *this == *sl; }
+    else if (Complex_Selector_Ptr_Const cpx = Cast<Complex_Selector>(&rhs)) { return *this == *cpx; }
+    else if (Compound_Selector_Ptr_Const cpd = Cast<Compound_Selector>(&rhs)) { return *this == *cpd; }
     // no compare method
     return this == &rhs;
   }
@@ -451,8 +451,8 @@ namespace Sass {
   bool Selector_List::operator== (const Expression& rhs) const
   {
     // solve the double dispatch problem by using RTTI information via dynamic cast
-    if (List_Ptr_Const ls = Cast<List>(&rhs)) { return ls->eq(*this); }
-    if (Selector_Ptr_Const ls = Cast<Selector>(&rhs)) { return this->eq(*ls); }
+    if (List_Ptr_Const ls = Cast<List>(&rhs)) { return *ls == *this; }
+    if (Selector_Ptr_Const ls = Cast<Selector>(&rhs)) { return *this == *ls; }
     // compare invalid (maybe we should error?)
     return false;
   }
@@ -691,7 +691,7 @@ namespace Sass {
       return (name() == rhs.name())
         && (matcher() == rhs.matcher())
         && (is_ns_eq(rhs))
-        && (value()->eq(*rhs.value()));
+        && (*value() == *rhs.value());
     }
     // not equal
     return false;
@@ -750,7 +750,7 @@ namespace Sass {
     {
       String_Obj lhs_ex = expression();
       String_Obj rhs_ex = rhs.expression();
-      if (rhs_ex && lhs_ex) return lhs_ex->eq(*rhs_ex);
+      if (rhs_ex && lhs_ex) return *lhs_ex == *rhs_ex;
       else return lhs_ex.ptr() == rhs_ex.ptr();
     }
     else return false;
@@ -1957,7 +1957,7 @@ namespace Sass {
         Expression_Obj rv = (*r)[i];
         Expression_Obj lv = (*this)[i];
         if (!lv || !rv) return false;
-        if (!(lv->eq(*rv))) return false;
+        if (!(*lv == *rv)) return false;
       }
       return true;
     }
@@ -1993,7 +1993,7 @@ namespace Sass {
         Expression_Obj rv = r->at(i);
         Expression_Obj lv = this->at(i);
         if (!lv || !rv) return false;
-        if (!(lv->eq(*rv))) return false;
+        if (!(*lv == *rv)) return false;
       }
       return true;
     }
@@ -2008,7 +2008,7 @@ namespace Sass {
         Expression_Obj lv = at(key);
         Expression_Obj rv = r->at(key);
         if (!rv || !lv) return false;
-        if (!(lv->eq(*rv))) return false;
+        if (!(*lv == *rv)) return false;
       }
       return true;
     }
