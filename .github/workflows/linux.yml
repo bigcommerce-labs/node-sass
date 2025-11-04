@@ -19,14 +19,8 @@ jobs:
             gpp: "g++-10"
             os: ubuntu-22.04
           - node: 22
-            gcc: "gcc-12"
-            gpp: "g++-12"
             os: ubuntu-latest
           - node: 24
-            cc: "clang"
-            cxx: "clang++"
-            autotools: "yes"
-            cppstd: "c++11"
             os: ubuntu-latest
 
 
